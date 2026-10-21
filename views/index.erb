@@ -1,0 +1,12 @@
+<p><a href="/new">Create a repository</a></p>
+
+<h2>Repositories</h2>
+<% if @repos.empty? %>
+  <p>None yet.</p>
+<% else %>
+  <ul>
+    <% @repos.each do |owner, name| %>
+      <li><a href="/<%= h owner %>/<%= h name %>"><%= h owner %>/<%= h name %></a></li>
+    <% end %>
+  </ul>
+<% end %>

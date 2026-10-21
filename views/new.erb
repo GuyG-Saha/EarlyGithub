@@ -1,0 +1,7 @@
+<h2>Create a repository</h2>
+<% if defined?(error) && error %><p class="error"><%= h error %></p><% end %>
+<form method="post" action="/repos">
+  <input name="owner" placeholder="owner" value="<%= h params[:owner] %>"> /
+  <input name="name" placeholder="name" value="<%= h params[:name] %>">
+  <button>Create</button>
+</form>
