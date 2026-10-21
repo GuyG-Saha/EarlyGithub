@@ -1,2 +1,6 @@
 # Hosted repositories live here at runtime; they are data, not source.
 /repos/
+
+# Gems installed locally by `bundle config set --local path vendor/bundle`.
+/vendor/
+/.bundle/
