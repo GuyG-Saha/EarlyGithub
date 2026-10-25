@@ -1,7 +1,13 @@
 <h2><%= h @owner %>/<%= h @name %></h2>
 
-<p>This repository is a bare git repo on disk at:</p>
+<p>Clone it:</p>
+<pre>git clone <%= h clone_url(@owner, @name) %></pre>
+
+<p>Push to it (you'll be asked for <%= h @owner %>'s password):</p>
+<pre>git remote add origin <%= h clone_url(@owner, @name) %>
+git push -u origin main</pre>
+
+<p>On disk, this repository is a bare git repo at:</p>
 <pre><%= h @path %></pre>
 
-<p>Cloning and pushing arrive in step 2 (HTTP) and step 4 (SSH).
-Browsing files and commits arrives in step 3.</p>
+<p>Browsing files and commits arrives in step 3, and SSH access in step 4.</p>
