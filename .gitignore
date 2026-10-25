@@ -4,3 +4,6 @@
 # Gems installed locally by `bundle config set --local path vendor/bundle`.
 /vendor/
 /.bundle/
+
+# Password hashes for HTTP users, created by bin/adduser.
+/users.yml

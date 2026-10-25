@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# Create or update a user who can push over HTTP.
+#   bin/adduser alice
+require "io/console"
+require_relative "../lib/users"
+
+name = ARGV[0] or abort "usage: bin/adduser <name>"
+print "Password for #{name}: "
+password = $stdin.tty? ? $stdin.noecho(&:gets) : $stdin.gets
+puts
+abort "empty password" if password.to_s.chomp.empty?
+
+Users.add(name, password.chomp)
+puts "Saved #{name} to #{Users.file}"
