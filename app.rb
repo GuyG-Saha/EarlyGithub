@@ -131,7 +131,7 @@ class EarlyGitHub < Sinatra::Base
     @owner, @name = owner, name
     @path = repo_path(owner, name)
     halt 404, "No such repository" unless File.directory?(@path)
-    _out, err, status = Open3.capture3("git", "--get-dir", @path, "ls-tree", "HEAD")
+    _out, err, status = Open3.capture3("git", "--git-dir", @path, "ls-tree", "HEAD")
     @entries = []
     p status
     if status.success?
