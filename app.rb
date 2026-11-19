@@ -94,10 +94,10 @@ class EarlyGitHub < Sinatra::Base
 
   post "/repos" do
     owner, name = params[:owner].to_s.strip, params[:name].to_s.strip
-    halt 422, erb(:new, locals: { error: "Names may use letters, digits, '-', '_' and '.'" }) unless valid_name?(owner) && valid_name?(name)
+    halt 422, erb(:new, locals: { message: "Names may use letters, digits, '-', '_' and '.'" }) unless valid_name?(owner) && valid_name?(name)
 
     path = repo_path(owner, name)
-    halt 409, erb(:new, locals: { error: "#{owner}/#{name} already exists" }) if File.exist?(path)
+    halt 409, erb(:new, locals: { message: "#{owner}/#{name} already exists" }) if File.exist?(path)
 
     # The whole "create repository" feature: make a bare repo and let git do the rest.
     FileUtils.mkdir_p(File.dirname(path))
