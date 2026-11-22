@@ -134,6 +134,8 @@ class EarlyGitHub < Sinatra::Base
     out, err, status = Open3.capture3("git", "--git-dir", @path, "ls-tree", "HEAD")
     @entries = []
     p status
+    p err
+    p out
     if status.success?
       @entries = out.lines
       pp @entries
