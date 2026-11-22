@@ -6,3 +6,4 @@ gem "rackup", "~> 2.1"
 # without compiling (Puma needs a C toolchain, which often stalls on Windows).
 # It used to ship with Ruby itself, the classic choice for 2000s-era Ruby apps.
 gem "webrick", "~> 1.9"
+gem "debug"
