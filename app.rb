@@ -131,16 +131,18 @@ class EarlyGitHub < Sinatra::Base
     @owner, @name = owner, name
     @path = repo_path(owner, name)
     halt 404, "No such repository" unless File.directory?(@path)
-    out, err, status = Open3.capture3("git", "--git-dir", @path, "ls-tree", "HEAD")
+    # List the top level of the default branch. In an empty repo HEAD points
+    # at a branch with no commits yet, so git fails and the list stays empty.
+    out, _err, result = Open3.capture3("git", "--git-dir", @path, "ls-tree", "HEAD")
     @entries = []
-    p status
-    p err
-    p out
-    if status.success?
-      @entries = out.lines
-      pp @entries
+    if result.success?
+      # Each line looks like "100644 blob b3a7...\tREADME.md"
+      @entries = out.lines.map do |line|
+        meta, name = line.chomp.split("\t", 2)
+        _mode, type, _sha = meta.split(" ")
+        { name: name, type: type }
+      end
     end
-    warn @entries.inspect
     erb :repo
   end
 end

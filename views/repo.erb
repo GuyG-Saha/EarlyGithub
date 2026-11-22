@@ -10,9 +10,12 @@ git push -u origin main</pre>
 <p>On disk, this repository is a bare git repo at:</p>
 <pre><%= h @path %></pre>
 
-<p>list: <ul>
-  <% @entries.each do |entry| %>
-    <li><%= entry[:type] == "tree" ? "📁" : "📄" %> <%= h entry[:name] %></li>
-  <% end %>
-</ul></p>
+<% unless @entries.empty? %>
+  <h3>Files</h3>
+  <ul>
+    <% @entries.each do |entry| %>
+      <li><%= entry[:type] == "tree" ? "📁" : "📄" %> <%= h entry[:name] %></li>
+    <% end %>
+  </ul>
+<% end %>
 <p>Browsing files and commits arrives in step 3, and SSH access in step 4.</p>
